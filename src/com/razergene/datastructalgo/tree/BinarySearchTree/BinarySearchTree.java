@@ -13,9 +13,9 @@ package com.razergene.datastructalgo.tree.BinarySearchTree;
 // void printTree( )      --> Print tree in sorted order
 
 /**
- * 二叉查找树
- * 左边的节点小，右边节点大。
- * logN
+ * 二叉查找树的左边的节点小，右边节点大，时间复杂度是 logN。
+ * 二叉查找树是将二分查找的效率和链表的灵活操作结合起来。
+ * 二叉查找树和快速排序有异曲同工之妙。
  */
 public class BinarySearchTree
 {
@@ -30,6 +30,8 @@ public class BinarySearchTree
 		root = null;
 	}
 
+	
+	
 	/**
 	 * Make the tree logically empty.
 	 */
@@ -48,6 +50,8 @@ public class BinarySearchTree
 		return root == null;
 	}
 
+	
+	
 	public boolean contains(Comparable x)
 	{
 		return contains(x, root);
@@ -65,29 +69,27 @@ public class BinarySearchTree
 		if (compareResult < 0)
 		{
 			return contains(x, t.left);
-		} 
-		else if (compareResult > 0)
+		} else if (compareResult > 0)
 		{
 			return contains(x, t.right);
-		} 
-		else
+		} else
 		{
 			return true;
 		}
 	}
 
+	
+	
 	/**
 	 * Internal method to get element field.
-	 * 
-	 * @param t
-	 *            the node.
+	 * @param t the node.
 	 * @return the element field or null if t is null.
 	 */
 	private Comparable elementAt(BinaryNode t)
 	{
 		return t == null ? null : t.element;
 	}
-
+	
 	/**
 	 * Find the smallest item in the tree.
 	 * 
@@ -101,7 +103,8 @@ public class BinarySearchTree
 	/**
 	 * Internal method to find the smallest item in a subtree.
 	 * 
-	 * @param t the node that roots the tree.
+	 * @param t
+	 *            the node that roots the tree.
 	 * @return node containing the smallest item.最左边的节点就是最小节点。
 	 */
 	private BinaryNode findMin(BinaryNode t)
@@ -128,7 +131,8 @@ public class BinarySearchTree
 	/**
 	 * Internal method to find the largest item in a subtree.
 	 * 
-	 * @param t the node that roots the tree.
+	 * @param t
+	 *            the node that roots the tree.
 	 * @return node containing the largest item.最右边的节点就是最大节点。
 	 */
 	private BinaryNode findMax(BinaryNode t)
@@ -142,9 +146,7 @@ public class BinarySearchTree
 
 	/**
 	 * Find an item in the tree.
-	 * 
-	 * @param x
-	 *            the item to search for.
+	 * @param x the item to search for.
 	 * @return the matching item or null if not found.
 	 */
 	public Comparable find(Comparable x)
@@ -154,11 +156,8 @@ public class BinarySearchTree
 
 	/**
 	 * Internal method to find an item in a subtree.
-	 * 
-	 * @param x
-	 *            is item to search for.
-	 * @param t
-	 *            the node that roots the tree.
+	 * @param x is item to search for.
+	 * @param t the node that roots the tree.
 	 * @return node containing the matched item.
 	 */
 	private BinaryNode find(Comparable x, BinaryNode t)
@@ -176,11 +175,11 @@ public class BinarySearchTree
 			return t; // Match
 	}
 
+	
+	
 	/**
 	 * Insert into the tree; duplicates are ignored.
-	 * 
-	 * @param x
-	 *            the item to insert.
+	 * @param x the item to insert.
 	 */
 	public void insert(Comparable x)
 	{
@@ -189,35 +188,35 @@ public class BinarySearchTree
 
 	/**
 	 * Internal method to insert into a subtree.
-	 * 
-	 * @param x
-	 *            the item to insert.
-	 * @param t
-	 *            the node that roots the tree.
+	 * @param x the item to insert.
+	 * @param t the node that roots the tree.
 	 * @return the new root.
 	 */
 	private BinaryNode insert(Comparable x, BinaryNode t)
 	{
-		/* 1 */if (t == null)
-			/* 2 */t = new BinaryNode(x, null, null);
+		if (t == null)
+		{
+			t = new BinaryNode(x, null, null);
+		}
+			
+		else if (x.compareTo(t.element) < 0)
+		{
+			t.left = insert(x, t.left);
+		}
 
-		/* 3 */else if (x.compareTo(t.element) < 0)
-			/* 4 */t.left = insert(x, t.left);
+		else if (x.compareTo(t.element) > 0)
+		{
+			t.right = insert(x, t.right);
+		}
 
-		/* 5 */else if (x.compareTo(t.element) > 0)
-			/* 6 */t.right = insert(x, t.right);
-
-		/* 7 */else
-			/* 8 */; // Duplicate; do nothing
-
-		/* 9 */return t;
+		return t;
 	}
 
+	
+	
 	/**
 	 * Remove from the tree. Nothing is done if x is not found.
-	 * 
-	 * @param x
-	 *            the item to remove.
+	 * @param x the item to remove.
 	 */
 	public void remove(Comparable x)
 	{
@@ -226,11 +225,8 @@ public class BinarySearchTree
 
 	/**
 	 * Internal method to remove from a subtree.
-	 * 
-	 * @param x
-	 *            the item to remove.
-	 * @param t
-	 *            the node that roots the tree.
+	 * @param x the item to remove.
+	 * @param t the node that roots the tree.
 	 * @return the new root.
 	 */
 	private BinaryNode remove(Comparable x, BinaryNode t)
@@ -256,6 +252,7 @@ public class BinarySearchTree
 		return t;
 	}
 
+	
 	/**
 	 * Print the tree contents in sorted order.
 	 */
@@ -270,8 +267,7 @@ public class BinarySearchTree
 	/**
 	 * Internal method to print a subtree in sorted order.
 	 * 
-	 * @param t
-	 *            the node that roots the tree.
+	 * @param t the node that roots the tree.
 	 */
 	private void printTree(BinaryNode t)
 	{
@@ -283,6 +279,7 @@ public class BinarySearchTree
 		}
 	}
 
+	
 	// Test program
 	public static void main(String[] args)
 	{

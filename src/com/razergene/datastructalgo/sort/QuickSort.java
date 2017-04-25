@@ -38,6 +38,31 @@ public class QuickSort
 	}
 
 	
+	public static int getMiddle2(int[] nums, int low, int high)
+	{
+		int temp = nums[low];
+		int pivot = low;
+		while(low < high)
+		{
+			while(nums[high] > temp)
+			{
+				high--;
+			}
+			Utils.switchNum(nums[high], nums[pivot]);
+			pivot = high;
+			
+			while(nums[low] < temp)
+			{
+				low++;
+			}
+			Utils.switchNum(nums[low], nums[pivot]);
+			pivot = low;
+		}
+		return pivot;
+	}
+	
+	
+	
 	public static void quickSort(int[] numbers,int low,int high)
     {
         if(low < high)

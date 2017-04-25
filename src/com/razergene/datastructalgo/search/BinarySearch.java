@@ -6,7 +6,11 @@ import com.razergene.datastructalgo.common.StdIn;
 import com.razergene.datastructalgo.common.StdOut;
 
 
-
+/**
+ * 二分查找的前提是当前数组已经是有序的。
+ * @author Razer
+ *
+ */
 public class BinarySearch
 {
 
